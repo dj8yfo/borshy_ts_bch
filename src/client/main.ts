@@ -5,20 +5,42 @@ import {
 } from './empty_enum'
 
 
-function main() {
+function emptyVarsEnum() {
     const chunk = borsh.serialize(
 	GAME_CELL_SCHEMA,
 	new GameCell({gameCellTac: new GameCellTac()}),
     )
-    console.log(chunk.length);
 
-    return fs.writeFile('./datums/empty_vars_enum.ts.dat', Buffer.from(chunk), function (err) {
+    fs.writeFile('./datums/empty_vars_enum.ts.dat', Buffer.from(chunk), function (err) {
 	if (err) {
 	    console.log(err);
 	    return ;
 	}
 	console.log('empty vars enum (borsh) > /empty_vars_enum.ts.dat');
     });
+
+    const cellDeser: GameCell = borsh.deserialize(
+	GAME_CELL_SCHEMA,
+	GameCell,
+	Buffer.from(chunk),
+    );
+
+    if (cellDeser.gameCellEmpty !== undefined) throw new Error(
+	"game cell empty is not undefined"
+    );
+    if (cellDeser.gameCellTic !== undefined) throw new Error(
+	"game cell tic is not undefined"
+    );
+    if (cellDeser.gameCellTac === undefined) throw new Error(
+	"game cell tac is undefined"
+    );
+    if (cellDeser.enum !== "gameCellTac") throw new Error(
+	"wrong enum value"
+    );
+
+}
+function main() {
+    emptyVarsEnum();
 }
 
 main()
