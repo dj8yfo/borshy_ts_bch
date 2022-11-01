@@ -1,17 +1,19 @@
 export class GameCell {
-	enum: string;
+	enum: string | undefined;
 	gameCellEmpty: GameCellEmpty | undefined;
 	gameCellTic: GameCellTic | undefined;
 	gameCellTac: GameCellTac | undefined;
 
 
-	constructor(
-		key: string,
-		value: any,
-	) {
-		this.enum = key;
-		this[key as keyof typeof this] = value;
-	}
+    constructor(properties: any) {
+        if (Object.keys(properties).length !== 1) {
+            throw new Error('Enum can only take single value');
+        }
+        Object.keys(properties).map((key) => {
+            this[key as keyof typeof this] = properties[key];
+            this.enum = key;
+        });
+    }
 };
 
 export class GameCellEmpty {

@@ -8,7 +8,7 @@ import {
 function main() {
     const chunk = borsh.serialize(
 	GAME_CELL_SCHEMA,
-	new GameCell('gameCellTac', new GameCellTac()),
+	new GameCell({gameCellTac: new GameCellTac()}),
     )
     console.log(chunk.length);
 

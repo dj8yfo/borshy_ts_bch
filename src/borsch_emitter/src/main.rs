@@ -3,6 +3,7 @@ use std::io::Write;
 use borsh::{BorshSerialize, BorshDeserialize};
 
 mod empty_vars_enum;
+// mod struct_vars_enum;
 
 
 fn byte_slice_to_file(name: &str, data_slice: &[u8]) {
