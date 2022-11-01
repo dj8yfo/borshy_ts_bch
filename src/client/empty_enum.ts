@@ -7,7 +7,7 @@ export class GameCell extends Enum {
 
 
     constructor(properties: any) {
-	super(properties);
+		super(properties);
     }
 };
 
