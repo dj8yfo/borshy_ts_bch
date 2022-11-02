@@ -41,7 +41,7 @@ mod experiment {
         let mut data_slice = Vec::<u8>::new();
         let arr_one: [u8; 32] = (0..32).collect::<Vec<_>>()
             .try_into().expect("wrong size iterator");
-        let arr_two: [u8; 32] = (0..32).rev().collect::<Vec<_>>()
+        let arr_two: [u8; 32] = (100..132).collect::<Vec<_>>()
             .try_into().expect("wrong size iterator");
 
         let math_stuff = crate::struct_vars_enum::GameInstruction::GameReset {
