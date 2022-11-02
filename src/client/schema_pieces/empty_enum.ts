@@ -1,23 +1,19 @@
-import Enum from './enum';
+import Enum from '../helpers_default/enum';
+import Struct from '../helpers_default/struct';
 
 export class GameCell extends Enum {
     gameCellEmpty: GameCellEmpty | undefined;
     gameCellTic: GameCellTic | undefined;
     gameCellTac: GameCellTac | undefined;
-
-
-    constructor(properties: any) {
-		super(properties);
-    }
 };
 
-export class GameCellEmpty {
+export class GameCellEmpty extends Struct {
 };
 
-export class GameCellTic {
+export class GameCellTic extends Struct {
 };
 
-export class GameCellTac {
+export class GameCellTac extends Struct {
 };
 
 

@@ -1,32 +1,20 @@
-import Enum from './enum';
-import Struct from './struct';
-import PublicKeyBE from './be_pubkey';
+import Enum from '../helpers_default/enum';
+import Struct from '../helpers_default/struct';
+import PublicKeyBE from '../helpers_default/be_pubkey';
 
 export class GameInstruction extends Enum {
     gameInstructionGameReset: GameInstructionGameReset | undefined;
     gameInstructionMakeTurn: GameInstructionMakeTurn | undefined;
-
-    constructor(properties: any) {
-	super(properties);
-    }
 };
 
 export class GameInstructionGameReset extends Struct {
     playerOne: PublicKeyBE | undefined;
     playerTwo: PublicKeyBE | undefined;
-
-    constructor(properties: any) {
-	super(properties);
-    }
 };
 
 export class GameInstructionMakeTurn extends Struct {
     row: number | undefined;
     col: number | undefined;
-
-    constructor(properties: any) {
-	super(properties);
-    }
 };
 
 export const GAME_INSTRUCTION_SCHEMA = new Map<any, any>([
