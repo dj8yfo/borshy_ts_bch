@@ -47,8 +47,8 @@ function emptyVarsEnum() {
 }
 
 function structVarsEnum1() {
-	const one: PublicKey = new PublicKey('4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi');
-	const two: PublicKey = new PublicKey('8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR');
+	const one: PublicKey = new PublicKey('1thX6LZfHDZZKUs92febYZhYRcXddmzfzF2NvTkPNE');
+	const two: PublicKey = new PublicKey('36UGjpLymavomFSFf85pNYP5sP6dMLeeKyg6nQU7Qwdh');
 	const chunk = borsh.serialize(
 		GAME_INSTRUCTION_SCHEMA,
 		new GameInstruction(

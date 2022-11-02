@@ -17,6 +17,7 @@ fn byte_slice_to_file(name: &str, data_slice: &[u8]) {
 }
 
 mod experiment {
+    use std::convert::TryInto;
     use borsh::{BorshDeserialize, BorshSerialize};
     use solana_program::pubkey::Pubkey;
 
@@ -38,10 +39,14 @@ mod experiment {
 
     pub fn struct_vars_enum1() {
         let mut data_slice = Vec::<u8>::new();
+        let arr_one: [u8; 32] = (0..32).collect::<Vec<_>>()
+            .try_into().expect("wrong size iterator");
+        let arr_two: [u8; 32] = (0..32).rev().collect::<Vec<_>>()
+            .try_into().expect("wrong size iterator");
 
         let math_stuff = crate::struct_vars_enum::GameInstruction::GameReset {
-            player_one: Pubkey::new_from_array([1; 32]),
-            player_two: Pubkey::new_from_array([2; 32]),
+            player_one: Pubkey::new_from_array(arr_one),
+            player_two: Pubkey::new_from_array(arr_two),
         };
         #[allow(clippy::single_match)]
         match math_stuff {
