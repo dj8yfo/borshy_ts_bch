@@ -7,14 +7,13 @@ export default class PublicKeyBE {
     constructor( fields: { value : Uint8Array } ) {
 	this.value = fields.value;
 	let copy = new Uint8Array(fields.value);
-	this.solPubKey = new PublicKey(copy.reverse());
+	this.solPubKey = new PublicKey(copy);
     }
 
     fromPubKey(arg: PublicKey) : this {
 	this.solPubKey = arg;
 	let copy = new Uint8Array(Uint8Array.from(arg.toBuffer()))
-	const uint8array = copy.reverse();
-	this.value = uint8array;
+	this.value = copy;
 
 	return this
     }

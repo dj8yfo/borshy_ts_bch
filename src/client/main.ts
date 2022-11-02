@@ -19,7 +19,7 @@ function emptyVarsEnum() {
     )
 
     fs.writeFile('./datums/empty_vars_enum.ts.dat', Buffer.from(chunk), function (err) {
-	if (err) {
+    if (err) {
 	    console.log(err);
 	    return ;
 	}
@@ -49,9 +49,21 @@ function emptyVarsEnum() {
 function range(size:number, startAt:number = 0): Uint8Array {
     return Uint8Array.from([...Array(size).keys()].map(i => i + startAt));
 }
+
 function structVarsEnum1() {
-    const one: PublicKeyBE = new PublicKeyBE({value: range(32, 0)});
-    const two: PublicKeyBE = new PublicKeyBE({value: range(32, 100)});
+    let one: PublicKeyBE = new PublicKeyBE({value: new Uint8Array(32)}).fromPubKey(
+	new PublicKey('1thX6LZfHDZZKUs92febYZhYRcXddmzfzF2NvTkPNE')
+    );
+    let two: PublicKeyBE = new PublicKeyBE({value: new Uint8Array(32)}).fromPubKey(
+	new PublicKey('7kuT1dfMhUysWcLEV1eYk8ir7RTjszHmsUdrrPQNThcv')
+    );
+    structVarsEnum1Arg(one, two, './datums/struct_vars_enum1_1.ts.dat');
+    one = new PublicKeyBE({value: range(32, 0)});
+    two = new PublicKeyBE({value: range(32, 100)});
+    structVarsEnum1Arg(one, two,  './datums/struct_vars_enum1_2.ts.dat');
+}
+
+function structVarsEnum1Arg(one: PublicKeyBE, two: PublicKeyBE, file: string) {
     const chunk = borsh.serialize(
 	GAME_INSTRUCTION_SCHEMA,
 	new GameInstruction(
@@ -63,12 +75,12 @@ function structVarsEnum1() {
 	),
     )
 
-    fs.writeFile('./datums/struct_vars_enum1.ts.dat', Buffer.from(chunk), function (err) {
-	if (err) {
+    fs.writeFile(file, Buffer.from(chunk), function (err) {
+    if (err) {
 	    console.log(err);
 	    return ;
 	}
-	console.log('struct vars enum 1 (borsh) > /empty_vars_enum.ts.dat');
+	console.log(`struct vars enum 1 (borsh) > ${file}`);
     });
 
     const gameInstDeser: GameInstruction = borsh.deserialize(
