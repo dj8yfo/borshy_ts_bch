@@ -134,11 +134,16 @@ function enumArray() {
 	console.log('empty vars enum (borsh) > /empty_vars_enum.ts.dat');
     });
 
-    const cellDeser: GameState = borsh.deserialize(
+    const stateDeser: GameState = borsh.deserialize(
 	GAME_STATE_SCHEMA,
 	GameState,
 	Buffer.from(chunk),
     );
+
+    if (stateDeser.playField!.length != 9) throw new Error(
+	"playField length"
+    );
+
 
 }
 function main() {
